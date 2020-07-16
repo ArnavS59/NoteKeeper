@@ -13,6 +13,11 @@ int count = 0;
 class _NoteListState extends State<NoteList> {
   @override
   Widget build(BuildContext context) {
+    // void naviagtetoPage() {
+    //   Navigator.push(context, MaterialPageRoute(builder: (context) {
+    //     return NoteDetails();
+    //   }));
+    // }
     return Scaffold(
       appBar: AppBar(
         title: Text("Notes"),
@@ -52,7 +57,9 @@ ListView getListNoteView() {
                 fontSize: 20,
               ),
             ),
-            subtitle: Text("Dummy DATE"),
+            subtitle: Text(
+              "Dummy DATE",
+            ),
             trailing: Icon(
               Icons.delete,
               color: Colors.grey,

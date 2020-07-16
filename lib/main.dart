@@ -15,7 +15,8 @@ class MyApp extends StatelessWidget {
           primarySwatch: Colors.orange,
           visualDensity: VisualDensity.adaptivePlatformDensity,
           primaryColor: Colors.orange,
-          accentColor: Colors.blue),
+          accentColor: Colors.deepPurple,
+          textTheme: TextTheme(caption: TextStyle(color: Colors.white))),
       home: NoteList(),
     );
   }

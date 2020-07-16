@@ -83,6 +83,7 @@ class _NoteDetailsState extends State<NoteDetails> {
                     child: Text(
                       "To Do",
                       textScaleFactor: 1.5,
+                      style: Theme.of(context).textTheme.caption,
                     ),
                   )),
                   Spacer(),
@@ -98,6 +99,7 @@ class _NoteDetailsState extends State<NoteDetails> {
                       child: Text(
                         "Delete",
                         textScaleFactor: 1.5,
+                        style: Theme.of(context).textTheme.caption,
                       ),
                     ),
                   )
