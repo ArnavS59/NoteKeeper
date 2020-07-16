@@ -1,6 +1,8 @@
 # NoteKeeper
 
-A new Flutter project.
+Who doesn't love their own notekeeper. 
+Organize notes with high medium and low priority. 
+SQL lite database plugin used.
 
 ## Getting Started
 
