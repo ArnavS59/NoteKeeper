@@ -1,114 +1,368 @@
-import 'package:flutter/material.dart';
+// import 'package:flutter/material.dart';
 
-class NoteDetails extends StatefulWidget {
-  const NoteDetails({Key key}) : super(key: key);
+// class NoteDetails extends StatefulWidget {
+//   const NoteDetails({Key key}) : super(key: key);
+
+//   @override
+//   _NoteDetailsState createState() => _NoteDetailsState();
+// }
+
+// class _NoteDetailsState extends State<NoteDetails> {
+//   static var _priorities = ["High", "Low"];
+//   TextEditingController titleController = TextEditingController();
+//   TextEditingController descriptionController = TextEditingController();
+//   //final TextStyle textStyle = Theme.of(context).textTheme.bodyText1;
+//   @override
+//   Widget build(BuildContext context) {
+//     return Scaffold(
+//       appBar: AppBar(
+//         title: Text("Edit Note"),
+//       ),
+//       body: Padding(
+//         padding: EdgeInsets.all(8),
+//         child: ListView(
+//           children: <Widget>[
+//             ListTile(
+//               title: DropdownButton(
+//                 items: _priorities.map((String dropDown) {
+//                   return DropdownMenuItem<String>(
+//                     value: dropDown,
+//                     child: Text(dropDown),
+//                   );
+//                 }).toList(),
+//                 value: "Low",
+//                 onChanged: (valueSelected) {
+//                   debugPrint("UserSelected $valueSelected");
+//                 },
+//               ),
+//             ),
+//             Padding(
+//               padding: EdgeInsets.only(top: 10, bottom: 10),
+//               child: TextField(
+//                 controller: titleController,
+//                 //style: ,
+//                 onChanged: (value) {
+//                   debugPrint("Something chnaged");
+//                 },
+//                 decoration: InputDecoration(
+//                     labelText: "Title",
+//                     //labelStyle: //
+//                     border: OutlineInputBorder(
+//                         borderRadius: BorderRadius.circular(5.0))),
+//               ),
+//             ),
+//             Padding(
+//               padding: EdgeInsets.only(top: 10, bottom: 10),
+//               child: TextField(
+//                 controller: descriptionController,
+//                 //  style: ,
+//                 onChanged: (value) {
+//                   debugPrint("Something chnaged");
+//                 },
+//                 decoration: InputDecoration(
+//                     labelText: "Description",
+//                     //labelStyle: //
+//                     border: OutlineInputBorder(
+//                         borderRadius: BorderRadius.circular(5.0))),
+//               ),
+//             ),
+//             //padding
+//             Padding(
+//               padding: const EdgeInsets.only(top: 15, bottom: 15),
+//               child: Row(
+//                 children: <Widget>[
+//                   Expanded(
+//                       child: RaisedButton(
+//                     color: Theme.of(context).accentColor,
+//                     onPressed: () {
+//                       setState(() {
+//                         debugPrint("Save button clicked");
+//                       });
+//                     },
+//                     elevation: 2,
+//                     child: Text(
+//                       "To Do",
+//                       textScaleFactor: 1.5,
+//                       style: Theme.of(context).textTheme.caption,
+//                     ),
+//                   )),
+//                   Spacer(),
+//                   Expanded(
+//                     child: RaisedButton(
+//                       color: Theme.of(context).accentColor,
+//                       onPressed: () {
+//                         setState(() {
+//                           debugPrint("Delete button clicked");
+//                         });
+//                       },
+//                       elevation: 2,
+//                       child: Text(
+//                         "Delete",
+//                         textScaleFactor: 1.5,
+//                         style: Theme.of(context).textTheme.caption,
+//                       ),
+//                     ),
+//                   )
+//                 ],
+//               ),
+//             ),
+//           ],
+//         ),
+//       ),
+//     );
+//   }
+// }
+
+//import 'dart:async';
+import 'package:flutter/material.dart';
+import '../models/note.dart';
+import '../utils/database_helper.dart';
+import 'package:intl/intl.dart';
+import 'dart:async';
+
+class NoteDetail extends StatefulWidget {
+  final String appBarTitle;
+  final Note note;
+
+  NoteDetail(this.note, this.appBarTitle);
 
   @override
-  _NoteDetailsState createState() => _NoteDetailsState();
+  State<StatefulWidget> createState() {
+    return NoteDetailState(this.note, this.appBarTitle);
+  }
 }
 
-class _NoteDetailsState extends State<NoteDetails> {
-  static var _priorities = ["High", "Low"];
+class NoteDetailState extends State<NoteDetail> {
+  static var _priorities = ['High', 'Low'];
+
+  DatabaseHelper helper = DatabaseHelper();
+
+  String appBarTitle;
+  Note note;
+
   TextEditingController titleController = TextEditingController();
   TextEditingController descriptionController = TextEditingController();
-  //final TextStyle textStyle = Theme.of(context).textTheme.bodyText1;
+
+  NoteDetailState(this.note, this.appBarTitle);
+
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: Text("Edit Note"),
-      ),
-      body: Padding(
-        padding: EdgeInsets.all(8),
-        child: ListView(
-          children: <Widget>[
-            ListTile(
-              title: DropdownButton(
-                items: _priorities.map((String dropDown) {
-                  return DropdownMenuItem<String>(
-                    value: dropDown,
-                    child: Text(dropDown),
-                  );
-                }).toList(),
-                value: "Low",
-                onChanged: (valueSelected) {
-                  debugPrint("UserSelected $valueSelected");
-                },
-              ),
-            ),
-            Padding(
-              padding: EdgeInsets.only(top: 10, bottom: 10),
-              child: TextField(
-                controller: titleController,
-                //style: ,
-                onChanged: (value) {
-                  debugPrint("Something chnaged");
-                },
-                decoration: InputDecoration(
-                    labelText: "Title",
-                    //labelStyle: //
-                    border: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(5.0))),
-              ),
-            ),
-            Padding(
-              padding: EdgeInsets.only(top: 10, bottom: 10),
-              child: TextField(
-                controller: descriptionController,
-                //  style: ,
-                onChanged: (value) {
-                  debugPrint("Something chnaged");
-                },
-                decoration: InputDecoration(
-                    labelText: "Description",
-                    //labelStyle: //
-                    border: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(5.0))),
-              ),
-            ),
-            //padding
-            Padding(
-              padding: const EdgeInsets.only(top: 15, bottom: 15),
-              child: Row(
-                children: <Widget>[
-                  Expanded(
-                      child: RaisedButton(
-                    color: Theme.of(context).accentColor,
-                    onPressed: () {
-                      setState(() {
-                        debugPrint("Save button clicked");
-                      });
-                    },
-                    elevation: 2,
-                    child: Text(
-                      "To Do",
-                      textScaleFactor: 1.5,
-                      style: Theme.of(context).textTheme.caption,
-                    ),
-                  )),
-                  Spacer(),
-                  Expanded(
-                    child: RaisedButton(
-                      color: Theme.of(context).accentColor,
-                      onPressed: () {
+    TextStyle textStyle = Theme.of(context).textTheme.headline6;
+
+    titleController.text = note.title;
+    descriptionController.text = note.description;
+
+    return WillPopScope(
+        onWillPop: () {
+          // Write some code to control things, when user press Back navigation button in device navigationBar
+          moveToLastScreen();
+          return Future.value(true);
+        },
+        child: Scaffold(
+          appBar: AppBar(
+            title: Text(appBarTitle),
+            leading: IconButton(
+                icon: Icon(Icons.arrow_back),
+                onPressed: () {
+                  // Write some code to control things, when user press back button in AppBar
+                  moveToLastScreen();
+                }),
+          ),
+          body: Padding(
+            padding: EdgeInsets.only(top: 15.0, left: 10.0, right: 10.0),
+            child: ListView(
+              children: <Widget>[
+                // First element
+                ListTile(
+                  title: DropdownButton(
+                      items: _priorities.map((String dropDownStringItem) {
+                        return DropdownMenuItem<String>(
+                          value: dropDownStringItem,
+                          child: Text(dropDownStringItem),
+                        );
+                      }).toList(),
+                      style: textStyle,
+                      value: getPriorityAsString(note.priority),
+                      onChanged: (valueSelectedByUser) {
                         setState(() {
-                          debugPrint("Delete button clicked");
+                          debugPrint('User selected $valueSelectedByUser');
+                          updatePriorityAsInt(valueSelectedByUser);
                         });
-                      },
-                      elevation: 2,
-                      child: Text(
-                        "Delete",
-                        textScaleFactor: 1.5,
-                        style: Theme.of(context).textTheme.caption,
+                      }),
+                ),
+
+                // Second Element
+                Padding(
+                  padding: EdgeInsets.only(top: 15.0, bottom: 15.0),
+                  child: TextField(
+                    controller: titleController,
+                    style: textStyle,
+                    onChanged: (value) {
+                      debugPrint('Something changed in Title Text Field');
+                      updateTitle();
+                    },
+                    decoration: InputDecoration(
+                        labelText: 'Title',
+                        labelStyle: textStyle,
+                        border: OutlineInputBorder(
+                            borderRadius: BorderRadius.circular(5.0))),
+                  ),
+                ),
+
+                // Third Element
+                Padding(
+                  padding: EdgeInsets.only(top: 15.0, bottom: 15.0),
+                  child: TextField(
+                    controller: descriptionController,
+                    style: textStyle,
+                    onChanged: (value) {
+                      debugPrint('Something changed in Description Text Field');
+                      updateDescription();
+                    },
+                    decoration: InputDecoration(
+                        labelText: 'Description',
+                        labelStyle: textStyle,
+                        border: OutlineInputBorder(
+                            borderRadius: BorderRadius.circular(5.0))),
+                  ),
+                ),
+
+                // Fourth Element
+                Padding(
+                  padding: EdgeInsets.only(top: 15.0, bottom: 15.0),
+                  child: Row(
+                    children: <Widget>[
+                      Expanded(
+                        child: RaisedButton(
+                          color: Theme.of(context).primaryColorDark,
+                          textColor: Theme.of(context).primaryColorLight,
+                          child: Text(
+                            'Save',
+                            textScaleFactor: 1.5,
+                          ),
+                          onPressed: () {
+                            setState(() {
+                              debugPrint("Save button clicked");
+                              _save();
+                            });
+                          },
+                        ),
                       ),
-                    ),
-                  )
-                ],
-              ),
+                      Container(
+                        width: 5.0,
+                      ),
+                      Expanded(
+                        child: RaisedButton(
+                          color: Theme.of(context).primaryColorDark,
+                          textColor: Theme.of(context).primaryColorLight,
+                          child: Text(
+                            'Delete',
+                            textScaleFactor: 1.5,
+                          ),
+                          onPressed: () {
+                            setState(() {
+                              debugPrint("Delete button clicked");
+                              _delete();
+                            });
+                          },
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+              ],
             ),
-          ],
-        ),
-      ),
+          ),
+        ));
+  }
+
+  void moveToLastScreen() {
+    return Navigator.pop(context, true);
+  }
+
+  // Convert the String priority in the form of integer before saving it to Database
+  void updatePriorityAsInt(String value) {
+    switch (value) {
+      case 'High':
+        note.priority = 1;
+        break;
+      case 'Low':
+        note.priority = 2;
+        break;
+    }
+  }
+
+  // Convert int priority to String priority and display it to user in DropDown
+  String getPriorityAsString(int value) {
+    String priority;
+    switch (value) {
+      case 1:
+        priority = _priorities[0]; // 'High'
+        break;
+      case 2:
+        priority = _priorities[1]; // 'Low'
+        break;
+    }
+    return priority;
+  }
+
+  // Update the title of Note object
+  void updateTitle() {
+    note.title = titleController.text;
+  }
+
+  // Update the description of Note object
+  void updateDescription() {
+    note.description = descriptionController.text;
+  }
+
+  // Save data to database
+  void _save() async {
+    moveToLastScreen();
+
+    note.date = DateFormat.yMMMd().format(DateTime.now());
+    int result;
+    if (note.id != null) {
+      // Case 1: Update operation
+      result = await helper.updateNote(note);
+    } else {
+      // Case 2: Insert Operation
+      result = await helper.insertNote(note);
+    }
+
+    if (result != 0) {
+      // Success
+      _showAlertDialog('Status', 'Note Saved Successfully');
+    } else {
+      // Failure
+      _showAlertDialog('Status', 'Problem Saving Note');
+    }
+  }
+
+  void _delete() async {
+    moveToLastScreen();
+
+    // Case 1: If user is trying to delete the NEW NOTE i.e. he has come to
+    // the detail page by pressing the FAB of NoteList page.
+    if (note.id == null) {
+      _showAlertDialog('Status', 'No Note was deleted');
+      return;
+    }
+
+    // Case 2: User is trying to delete the old note that already has a valid ID.
+    int result = await helper.deleteNote(note.id);
+    if (result != 0) {
+      _showAlertDialog('Status', 'Note Deleted Successfully');
+    } else {
+      _showAlertDialog('Status', 'Error Occured while Deleting Note');
+    }
+  }
+
+  void _showAlertDialog(String title, String message) {
+    AlertDialog alertDialog = AlertDialog(
+      title: Text(title),
+      content: Text(message),
     );
+    showDialog(context: context, builder: (_) => alertDialog);
   }
 }
