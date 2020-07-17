@@ -5,9 +5,7 @@ class Note {
   String description;
   String date;
 
-  //NotewithId({this.title, this.date, this.description, this.priority});
-  Note({this.title, this.date, this.description, this.id, this.priority});
-
+  Note(this.date, this.title, this.priority);
   Map<String, dynamic> toMap() {
     var map = Map<String, dynamic>();
     if (id != null) {
@@ -28,11 +26,3 @@ class Note {
     this.priority = map["priority"];
   }
 }
-
-// String get title => _title;
-
-// set title(String newTitle) {
-//   if (newTitle.length <= 255) {
-//     this.title = newTitle;
-//   }
-// }
