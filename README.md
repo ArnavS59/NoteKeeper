@@ -1,8 +1,8 @@
 # NoteKeeper
 
-Who doesn't love their own notekeeper. 
-Organize notes with high medium and low priority. 
+Who doesn't love their own To-do List app. 
 SQL lite database plugin used.
+Documentation for the app on Medium.
 
 ## Getting Started
 
