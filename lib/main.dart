@@ -1,62 +1,39 @@
-// import 'package:flutter/material.dart';
-// import './screens/notelist.dart';
-
-// void main() {
-//   runApp(MyApp());
-// }
-
-// class MyApp extends StatelessWidget {
-//   // This widget is the root of your application.
-//   @override
-//   Widget build(BuildContext context) {
-//     return MaterialApp(
-//       title: 'NoteKeeper',
-//       theme: ThemeData(
-//           primarySwatch: Colors.orange,
-//           visualDensity: VisualDensity.adaptivePlatformDensity,
-//           primaryColor: Colors.orange,
-//           accentColor: Colors.deepPurple,
-//           textTheme: TextTheme(caption: TextStyle(color: Colors.white))),
-//       home: NoteList(),
-//     );
-//   }
-// }
-
-// // class MyHomePage extends StatefulWidget {
-// //   MyHomePage({Key key, this.title}) : super(key: key);
-
-// //   final String title;
-
-// //   @override
-// //   _MyHomePageState createState() => _MyHomePageState();
-// // }
-
-// // class _MyHomePageState extends State<MyHomePage> {
-// //   @override
-// //   Widget build(BuildContext context) {
-// //     return Scaffold(
-// //         appBar: AppBar(
-// //           title: Text(widget.title),
-// //         ),
-// //         body: NoteList()
-// // }
-// //}
+import './todo.dart';
 import 'package:flutter/material.dart';
-
-import './screens/notelist.dart';
 
 void main() {
   runApp(MyApp());
 }
 
 class MyApp extends StatelessWidget {
+  // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'NoteKeeper',
       debugShowCheckedModeBanner: false,
-      theme: ThemeData(primarySwatch: Colors.deepPurple),
-      home: NoteList(),
+      title: 'Flutter Demo',
+      theme: ThemeData.dark().copyWith(
+        accentColor: Colors.purple,
+      ),
+      home: ToDO(),
     );
+  }
+}
+
+class MyHomePage extends StatefulWidget {
+  MyHomePage({Key key}) : super(key: key);
+
+  @override
+  _MyHomePageState createState() => _MyHomePageState();
+}
+
+class _MyHomePageState extends State<MyHomePage> {
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+        appBar: AppBar(
+          title: Text("ToDo"),
+        ),
+        body: Center());
   }
 }
